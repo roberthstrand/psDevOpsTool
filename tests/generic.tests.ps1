@@ -1,6 +1,6 @@
 BeforeAll {
     # Import module
-    Import-Module -Name "$PSScriptRoot/../src/psDevOpsTool.psd1" -Force -ErrorAction Stop
+    Import-Module -Name "$PSScriptRoot/../psDevOpsTool/psDevOpsTool.psd1" -Force -ErrorAction Stop
 }
 
 Describe 'Testing base64 capabilities' {
