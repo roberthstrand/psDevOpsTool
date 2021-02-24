@@ -11,5 +11,5 @@ jobs:
         
       - name: Publishing
         run: |
-          Publish-Module -Path 'CloudiQ' -NuGetApiKey ${{ secrets.PSGALLERY }}
+          Publish-Module -Path 'src' -NuGetApiKey ${{ secrets.PSGALLERY }}
         shell: pwsh
