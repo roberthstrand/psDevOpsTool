@@ -1,6 +1,7 @@
 # Dot sourcing all available functions
 $functionTypes = @(
     '/'
+    '/generic/'
 )
 
 foreach ($function in $functionTypes) {
@@ -9,4 +10,5 @@ foreach ($function in $functionTypes) {
     }
 }
 
-#New-Alias -Name '' -Value '' -Description ''
+New-Alias -Name 'ctb64' -Value 'ConvertTo-Base64' -Description 'Encoding string to base64'
+New-Alias -Name 'cfb64' -Value 'ConvertFrom-Base64' -Description 'Decoding string from base64'

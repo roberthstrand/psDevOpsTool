@@ -1,0 +1,59 @@
+name: 'Code Tests'
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+jobs:
+  pester-pwsh:
+    strategy:
+      matrix:
+        platform: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.platform }}
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run Pester tests (pwsh)
+      run: |
+        Write-host $PSVersionTable.PSVersion.Major $PSVersionTable.PSRemotingProtocolVersion.Minor
+        Set-PSRepository psgallery -InstallationPolicy trusted
+        Install-Module -Name Pester -RequiredVersion 5.0.4 -confirm:$false -Force
+        Invoke-Pester -Path "tests"
+      
+      shell: pwsh
+
+  pester-posh:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run Pester tests (PowerShell)
+      run: |
+        Write-host $PSVersionTable.PSVersion.Major $PSVersionTable.PSRemotingProtocolVersion.Minor
+        Set-PSRepository psgallery -InstallationPolicy trusted
+        Install-Module -Name Pester -RequiredVersion 5.0.4 -Confirm:$false -Force
+        Invoke-Pester -Path "tests"
+        if ($Error[0].Fullyqualifiederrorid -eq 'PesterAssertionFailed') {exit 1}
+      shell: powershell
+
+  codecov:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+        
+      - name: pester
+        run: |
+          Set-PSRepository psgallery -InstallationPolicy trusted
+          Install-Module -Name Pester -RequiredVersion 5.0.4 -Force;
+          $paths = @(
+            '.\src\functions\*.ps1'
+            '.\src\functions\generic\*.ps1'
+            )
+          Invoke-Pester -Path "tests" -CodeCoverage $paths -CodeCoverageOutputFileFormat "JaCoCo";
+        shell: pwsh
+      
+      - name: Codecov
+        uses: codecov/codecov-action@v1.0.13
+        with:
+          name: Cloud-iQ
+          token: ${{ secrets.CODECOV }}
+          file: coverage.xml
