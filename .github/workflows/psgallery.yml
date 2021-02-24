@@ -2,6 +2,8 @@ name: PSGallery
 on:
   release:
     types: [published]
+  push:
+    branches: [ main ]
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -11,5 +13,5 @@ jobs:
         
       - name: Publishing
         run: |
-          Publish-Module -Path 'src' -NuGetApiKey ${{ secrets.PSGALLERY }}
+          Publish-Module -Path 'psDevOpsTool' -NuGetApiKey ${{ secrets.PSGALLERY }}
         shell: pwsh
