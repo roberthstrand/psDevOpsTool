@@ -3,7 +3,7 @@ on:
   push:
     branches: [ main ]
 jobs:
-  psgallery_publish:
+  build-site:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
