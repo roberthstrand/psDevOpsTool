@@ -50,5 +50,5 @@ function ConvertFrom-Base64 {
         $String
     )
 
-    return [System.Text.Encoding]::Unicode.GetString([System.Convert]::FromBase64String($String))
+    return [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($String))
 }
