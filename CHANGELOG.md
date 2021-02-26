@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.0-alpha2
+
+- ConvertFrom-Base64 not working as intended (#1)
 ## 1.0.0-alpha1
 Initial release, basic functionality and testing.
 

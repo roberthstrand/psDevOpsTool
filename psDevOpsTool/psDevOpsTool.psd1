@@ -21,7 +21,7 @@
     )
     PrivateData       = @{
         PSData = @{
-            Prerelease      = 'alpha1'
+            Prerelease      = 'alpha2'
             Tags         = @("DevOps")
             ProjectUri   = 'https://github.com/roberthstrand/psDevOpsTool'
             ReleaseNotes = 'https://github.com/roberthstrand/psDevOpsTool/releases'
